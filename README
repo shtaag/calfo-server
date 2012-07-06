@@ -1,0 +1,9 @@
+-- calfo-server README --
+(About)
+This app is for my training of Yesod-Haskell.
+It's like bottle message, which wanders the world.
+You can see it on Google Map.
+
+(History)
+2012/July/06 -- started to develop
+
