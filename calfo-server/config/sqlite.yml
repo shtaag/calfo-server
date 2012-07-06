@@ -1,0 +1,20 @@
+Default: &defaults
+  database: calfo-server.sqlite3
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  database: calfo-server_test.sqlite3
+  <<: *defaults
+
+Staging:
+  database: calfo-server_staging.sqlite3
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: calfo-server_production.sqlite3
+  poolsize: 100
+  <<: *defaults
