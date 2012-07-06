@@ -133,9 +133,10 @@ instance YesodAuth App where
     type AuthId App = UserId
 
     -- Where to send a user after successful login
-    loginDest _ = HomeR
+    loginDest _ = MapR
     -- Where to send a user after logout
-    logoutDest _ = HomeR
+    -- logoutDest _ = HomeR
+    logoutDest _ = MyLoginR
 
     getAuthId creds = runDB $ do
         x <- getBy $ UniqueUser $ credsIdent creds
@@ -145,7 +146,7 @@ instance YesodAuth App where
                 fmap Just $ insert $ User (credsIdent creds) Nothing
 
     -- You can add other plugins like BrowserID, email or OAuth here
-    authPlugins _ = [authBrowserId, authGoogleEmail]
+    authPlugins _ = [authBrowserId]
 
     authHttpManager = httpManager
 
