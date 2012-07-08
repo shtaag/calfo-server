@@ -6,4 +6,5 @@
 
 / HomeR GET POST
 /mylogin MyLoginR GET
-/map MapR GET
+/map MapR GET POST
+/pos PosR GET

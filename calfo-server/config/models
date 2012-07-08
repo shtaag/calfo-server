@@ -7,5 +7,12 @@ Email
     user UserId Maybe
     verkey Text Maybe
     UniqueEmail email
+Message
+    user UserId
+    subject Text
+    body Text
+    lat Double
+    lng Double
+    public Text
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)
