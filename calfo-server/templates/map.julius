@@ -1,0 +1,39 @@
+function initialize(){
+  var latlng = new google.maps.LatLng(#{show $ formLat res},#{show $ formLng res});
+  alert(#{show $ formLat res});
+  var myOptions = {
+    zoom: 19,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+}
+
+
+function receivePos() {
+  $.ajax('/pos', {
+    type: 'GET',
+    success: function(json) {
+      alert(json.lat);
+    },
+    error: function() {
+      alert("error");
+    }
+  );
+}
+
+
+function jsonRequest(json) {
+  if (json.Pos){
+    $.each(json.Pos,function() {addMarker(this);});
+  }
+}
+
+
+function addMarker(pos) {
+  var point = new google.maps.LatLng(pos.lat, pos.lng);
+  var marker = new google.maps.Marker({
+    position:point,
+    map:map
+  });
+}
