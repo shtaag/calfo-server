@@ -19,7 +19,7 @@ function receivePos() {
     error: function() {
       alert("error");
     }
-  );
+  });
 }
 
 
