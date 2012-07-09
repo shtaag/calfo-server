@@ -1,0 +1,42 @@
+module Handler.Map where
+
+import Import
+import Yesod.Form.Nic (YesodNic, nicHtmlField)
+import Yesod.Auth
+
+getMapR :: Handler RepHtml
+getMapR = do
+  (formWidget, formEnctype) <- generateFormPost messageForm
+  defaultLayout $ do
+    setTitle "Create Your Message!!"
+    $(widgetFile "map")
+
+postMapR :: Handler RepHtml
+postMapR = do
+  ((result, formWidget), formEnctype) <- runFormPost messageForm
+  case result of
+    FormSuccess res -> do
+      maid <- maybeAuthId
+      _ <- runDB $ insert [user =. maid, 
+      return ()
+    _ -> do
+      return ()
+  defaultLayout $ do
+    setTitle "Your Message!!"
+    $(widgetFile "map")
+
+data MessageForm = MessageForm {
+  messageFormSubject :: Text
+, messageFormBody :: Text
+, messageFormLat :: Text
+, messageFormLng :: Text
+, messageFormPubl :: Text
+}
+
+messageForm :: Form MessageForm
+messageForm = renderDivs $ MessageForm
+  <$> areq textField "Subject" Nothing
+  <*> areq textField "Body" Nothing
+  <*> areq textField "latitude" Nothing
+  <*> areq textField "longitude" Nothing
+  <*> areq textField "public" Nothing
