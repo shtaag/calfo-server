@@ -11,10 +11,20 @@ function initialize(){
 
 
 function receivePos() {
-  $.ajax('/pos', {
-    type: 'GET',
+    alert("receivePos called");
+    var data = {
+        formSubject : 'aaa',
+        formBody : 'xxx',
+        formLat : '38.0',
+        formLng : '135.0',
+        formPubl : 'yes'
+    }
+  $.ajax({
+    url: '/map',
+    type: 'POST',
+    data : data,
     success: function(json) {
-      alert(json.lat);
+      alert(json);
     },
     error: function() {
       alert("error");

@@ -19,6 +19,7 @@
         \<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         \<![endif]-->
 
+        <script type="text/javascript" src=@{StaticR js_jquery_1_8_0_js}/>
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
     <body>

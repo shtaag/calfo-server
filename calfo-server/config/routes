@@ -8,3 +8,4 @@
 /mylogin MyLoginR GET
 /map MapR GET POST
 /pos PosR GET
+/myform MyFormR GET POST

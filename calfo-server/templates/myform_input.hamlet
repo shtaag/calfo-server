@@ -1,0 +1,6 @@
+$doctype 5
+<html>
+    <h2>Say It
+    <form method=post enctype=#{formEnctype}>
+      ^{formWidget}
+      <input type="submit">

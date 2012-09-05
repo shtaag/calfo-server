@@ -13,31 +13,27 @@ getMapR = do
 
 postMapR :: Handler RepHtml
 postMapR = do
+  requireAuth
   ((result, formWidget), formEnctype) <- runFormPost (messageForm Nothing)
   case result of
     FormSuccess res -> do
-      defaultLayout $ do $(widgetFile "map")
-/*   
-      Just maid <- maybeAuthId
-      messageId <- runDB $ insert Message {
-        messageUser = maid
-       , messageSubject = formSubject res
-          , messageBody = formBody res
-          , messageLat = formLat res
-          , messageLng = formLng res
-          , messagePublic = formPubl res
-        }
-        return ()
-*/
-    _ -> do
-      defaultLayout [whamlet|
-        <h1> latitude 
+       --  $(logInfo) (formSubject res)
+        Just maid <- maybeAuthId
+        messageId <- runDB $ insert Message {
+            messageUser = maid
+            , messageSubject = formSubject res
+            , messageBody = formBody res
+            , messageLat = formLat res
+            , messageLng = formLng res
+            , messagePublic = formPubl res
+            }
+        defaultLayout $ do
+            setTitle "Your Message!!"
+            $(widgetFile "map")
+    _ ->
+      defaultLayout $ [whamlet|
+        <h1> fail.
         |]
-/*
-    defaultLayout $ do
-    setTitle "Your Message!!"
-    $(widgetFile "map")
-*/
 
 data MessageForm = MessageForm {
   formSubject :: Text
@@ -46,7 +42,7 @@ data MessageForm = MessageForm {
 , formLng :: Double
 , formPubl :: Text
 } deriving Show
-  
+
 messageForm :: Maybe MessageForm -> Form MessageForm
 messageForm mmessage = renderDivs $ MessageForm
   <$> areq textField "Subject" (fmap formSubject mmessage)
